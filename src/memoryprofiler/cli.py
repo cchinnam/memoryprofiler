@@ -13,7 +13,11 @@ from .models import MemoryProfile
 
 
 def _load_dotenv(path: str = ".env") -> None:
-    """Minimal .env loader (no dependency): sets vars not already in env."""
+    """Minimal .env loader (no dependency): sets vars not already in env.
+
+    Strips surrounding quotes and trailing ``# inline comments`` so a value
+    like ``KEY=abc   # note`` correctly resolves to ``abc``.
+    """
     import os
 
     if not os.path.exists(path):
@@ -24,7 +28,15 @@ def _load_dotenv(path: str = ".env") -> None:
             if not line or line.startswith("#") or "=" not in line:
                 continue
             key, val = line.split("=", 1)
-            os.environ.setdefault(key.strip(), val.strip())
+            val = val.strip()
+            if len(val) >= 2 and val[0] == val[-1] and val[0] in "\"'":
+                val = val[1:-1]  # quoted value
+            else:
+                for sep in (" #", "\t#"):  # strip trailing inline comment
+                    if sep in val:
+                        val = val.split(sep, 1)[0].rstrip()
+                        break
+            os.environ.setdefault(key.strip(), val)
 
 
 def main() -> None:
