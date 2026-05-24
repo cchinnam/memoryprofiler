@@ -63,6 +63,6 @@ FastAPI · Modal · Phoenix + OpenTelemetry (planned)
 
 - [x] Profiler (weights / KV cache / activations, memory-bound detection)
 - [x] Rule-based advisor + CLI
-- [ ] LLM advisor (Nemotron via NIM) behind the same contract
+- [x] LLM advisor (Nemotron via NIM) behind the same contract
 - [ ] FastAPI service + Phoenix tracing
 - [ ] Deploy on Modal (on-demand GPU) / Docker

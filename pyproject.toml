@@ -8,6 +8,8 @@ dependencies = ["pydantic>=2.0"]
 [project.optional-dependencies]
 # Only needed where you actually run the profiler (a GPU box / Modal):
 gpu = ["torch", "transformers", "accelerate", "bitsandbytes"]
+# LLM advisor — Nemotron via NIM (Stage 3):
+llm = ["openai>=1.0"]
 # For the FastAPI service (Stage 4):
 serve = ["fastapi", "uvicorn", "httpx"]
 
