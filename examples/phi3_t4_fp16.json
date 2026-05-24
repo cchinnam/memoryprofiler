@@ -1,0 +1,12 @@
+{
+  "model": "microsoft/Phi-3-mini-4k-instruct",
+  "gpu": "Tesla T4",
+  "dtype": "float16",
+  "weights_gb": 7.642,
+  "kv_cache_plus_activations_gb": 0.215,
+  "peak_total_gb": 7.857,
+  "avg_compute_util_pct": 80.8,
+  "avg_memory_bw_util_pct": 82.8,
+  "memory_bound": true,
+  "generated_tokens": 500
+}

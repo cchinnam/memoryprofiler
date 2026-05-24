@@ -1,0 +1,10 @@
+{
+  "model": "microsoft/Phi-3-mini-4k-instruct",
+  "gpu": "Tesla T4",
+  "dtype": "int8",
+  "weights_gb": 4.024,
+  "kv_cache_plus_activations_gb": 0.22,
+  "peak_total_gb": 4.253,
+  "memory_bound": false,
+  "generated_tokens": 500
+}

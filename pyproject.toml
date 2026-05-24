@@ -1,0 +1,22 @@
+[project]
+name = "memoryprofiler"
+version = "0.1.0"
+description = "Agentic GPU memory profiler — measures LLM GPU memory and recommends optimizations."
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.0"]
+
+[project.optional-dependencies]
+# Only needed where you actually run the profiler (a GPU box / Modal):
+gpu = ["torch", "transformers", "accelerate", "bitsandbytes"]
+# For the FastAPI service (Stage 4):
+serve = ["fastapi", "uvicorn", "httpx"]
+
+[project.scripts]
+memoryprofiler = "memoryprofiler.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
