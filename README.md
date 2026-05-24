@@ -43,6 +43,24 @@ memoryprofiler profile microsoft/Phi-3-mini-4k-instruct            # FP16
 memoryprofiler profile microsoft/Phi-3-mini-4k-instruct --int8     # INT8
 ```
 
+## Run the API
+
+```bash
+pip install -e ".[serve]"                 # + ".[llm]" for the Nemotron advisor
+uvicorn memoryprofiler.api:app --reload   # run from the repo root
+```
+
+```bash
+# /advise needs no GPU — works anywhere:
+curl -s localhost:8000/advise -H 'content-type: application/json' \
+  -d "{\"profile\": $(cat examples/phi3_t4_fp16.json),
+       \"measured_int8\": $(cat examples/phi3_t4_int8.json),
+       \"llm\": false}"
+```
+
+Set `"llm": true` to route through the Nemotron advisor. `POST /profile`
+(GPU only) is hosted on Modal in the next stage.
+
 ## Measured example (Tesla T4, free Colab)
 
 | | Weights | Peak | Bottleneck |
@@ -64,5 +82,6 @@ FastAPI · Modal · Phoenix + OpenTelemetry (planned)
 - [x] Profiler (weights / KV cache / activations, memory-bound detection)
 - [x] Rule-based advisor + CLI
 - [x] LLM advisor (Nemotron via NIM) behind the same contract
-- [ ] FastAPI service + Phoenix tracing
+- [x] FastAPI service (`/advise`, `/profile`)
+- [ ] Phoenix tracing
 - [ ] Deploy on Modal (on-demand GPU) / Docker
